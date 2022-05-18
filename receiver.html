@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>  
+<html>  
+<head>  
+    <meta charset="UTF-8" />
+    <title>websocket receiver</title>  
+</head>
+
+<body>
+    <p>接收端</p>
+    <div></div>
+
+    <script>
+        var div = document.querySelector('div')
+        let socket = new WebSocket('ws://localhost:3000/');
+              socket.addEventListener('open', function (){
+                  console.log("Cesium连接成功")
+              })
+        socket.addEventListener('message', function(a){
+            var dv = document.createElement("div")
+            dv.innerHTML = "收到服务端的数据:" + a.data
+            div.appendChild(dv)
+            // console.log(a.data)
+        })   
+    </script>
+      
+</body>
+
+
+</html>

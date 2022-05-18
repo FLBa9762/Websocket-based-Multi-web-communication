@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>  
+<html>  
+<head>  
+    <meta charset="UTF-8" />
+    <!-- <meta http-equiv="content-type" content="text/html" />   -->
+    <title>websocket send</title>  
+</head>  
+   
+<body>
+    <p>输入框</p>
+    <textarea name="TLE数据" cols="50" rows="5"></textarea>
+    <button>发送请求</button>
+    <!-- 显示结果 -->
+    <p>------------------------------------------------------------------</p>
+    <p>------------------------------------------------------------------</p>
+    <p>对话框</p>
+    <div></div>
+    
+    <script>
+        var input = document.querySelector('textarea')
+        var button = document.querySelector('button')
+        var div = document.querySelector('div')
+        var socket = new WebSocket('ws://localhost:3000/');
+
+        socket.addEventListener('open', function (){
+            div.innerHTML = '连接服务器成功'       
+            // console.log("测试链接成功")
+        })
+        // 发送数据
+        button.addEventListener('click', function(){
+            var value = input.value
+            socket.send(value)
+            var dv = document.createElement("div")
+            dv.innerHTML = "向服务器发送数据:" + value
+            div.appendChild(dv)
+        })
+
+        // 接收数据
+        socket.addEventListener('message', function(a){
+            console.log(a.data)            
+        })
+
+	</script>
+</body>  
+</html>  
